@@ -12,14 +12,14 @@ jobs:
               uses: actions/cache/restore@v3
               with:
                   path: /media/saved-cache
-                  key: template-os-files-build-cache-${{ github.run_id }}
-                  restore-keys: template-os-files-build-cache
+                  key: template-config-files-build-cache-${{ github.run_id }}
+                  restore-keys: template-config-files-build-cache
             - name: Import cache
               run: |
                   cat | \
                       docker run --pull always --rm \
                           --volume "/media/saved-cache:/media/saved-cache" \
-                          --volume "template-os-files-build-cache:/media/build-cache" \
+                          --volume "template-config-files-build-cache:/media/build-cache" \
                           madebytimo/scripts \
                           bash \
                       << EOF
@@ -34,8 +34,9 @@ jobs:
             - name: Download script
               run: |
                 curl --silent --output /usr/local/bin/static-code-analysis.sh \
-                    https://gitlab.com/madebyTimo/scripts-development/-/raw/main/scripts/static-code-analysis.sh && \
-                    chmod +x /usr/local/bin/static-code-analysis.sh
+                    https://gitlab.com/madebyTimo/scripts-development/-/raw/main/scripts/\
+                static-code-analysis.sh \
+                    && chmod +x /usr/local/bin/static-code-analysis.sh
             - name: Analyze
               run: static-code-analysis.sh
               env:
@@ -48,7 +49,7 @@ jobs:
               run: |
                   docker run --pull always --rm \
                       --volume "/media/saved-cache:/media/saved-cache" \
-                      --volume "template-os-files-build-cache:/media/build-cache" \
+                      --volume "template-config-files-build-cache:/media/build-cache" \
                       madebytimo/scripts \
                       compress.sh --fast --output /media/saved-cache/build-cache /media/build-cache
                   sudo chown -R "$(whoami)" /media/saved-cache
@@ -56,4 +57,4 @@ jobs:
               uses: actions/cache/save@v3
               with:
                   path: /media/saved-cache
-                  key: template-os-files-build-cache-${{ github.run_id }}
+                  key: template-config-files-build-cache-${{ github.run_id }}
