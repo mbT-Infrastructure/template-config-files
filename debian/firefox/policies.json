@@ -1,0 +1,101 @@
+{
+    "policies": {
+        "Cookies": {
+            "Behavior": "reject-tracker-and-partition-foreign",
+            "BehaviorPrivateBrowsing": "reject-tracker-and-partition-foreign"
+        },
+        "DisablePocket": true,
+        "DisableTelemetry": true,
+        "DisplayBookmarksToolbar": "always",
+        "DontCheckDefaultBrowser": true,
+        "EnableTrackingProtection": {
+            "Value": true,
+            "Cryptomining": true,
+            "Fingerprinting": true,
+            "EmailTracking": true
+        },
+        "ExtensionSettings": {
+            "446900e4-71c2-419f-a6a7-df9c091e268b": {
+                "installation_mode": "normal_installed",
+                "install_url": "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi",
+                "default_area": "navbar"
+            }
+        },
+        "FirefoxHome": {
+            "SponsoredTopSites": false
+        },
+        "FirefoxSuggest": {
+            "SponsoredSuggestions": false,
+            "ImproveSuggest": false
+        },
+        "Homepage": {
+            "URL": "about:newtab",
+            "StartPage": "previous-session"
+        },
+        "ManagedBookmarks": [
+            {
+                "toplevel_name": "Defaults"
+            },
+            {
+                "url": "https://madebytimo.de",
+                "name": "made by Timo"
+            },
+            {
+                "name": "Firefox",
+                "children": [
+                    {
+                        "url": "about:unloads",
+                        "name": "Tab Unloading"
+                    },
+                    {
+                        "url": "about:performance",
+                        "name": "Task-Manager"
+                    }
+                ]
+            }
+        ],
+        "NoDefaultBookmarks": true,
+        "OverrideFirstRunPage": "",
+        "OverridePostUpdatePage": "",
+        "PasswordManagerEnabled": false,
+        "Preferences": {
+            "browser.ctrlTab.sortByRecentlyUsed": {
+                "Value": true,
+                "Status": "default"
+            },
+            "browser.warnOnQuitShortcut": {
+                "Value": false,
+                "Status": "default"
+            },
+            "extensions.formautofill.creditCards.enabled": {
+                "Value": false,
+                "Status": "default"
+            }
+        },
+        "RequestedLocales": "de,en-US",
+        "SearchEngines": {
+            "Add": [
+                {
+                    "Name": "DuckDuckGo mbT",
+                    "URLTemplate": "https://duckduckgo.com/?kp=-2&kn=1&k1=-1&kak=-1&kax=-1&kaq=-1&kap=-1&kau=-1&kao=-1&q={searchTerms}",
+                    "Method": "GET",
+                    "IconURL": "https://duckduckgo.com/favicon.ico",
+                    "SuggestURLTemplate": "https://duckduckgo.com/ac/?q={searchTerms}&type=list",
+                    "Alias": "ddg"
+                }
+            ],
+            "Default": "DuckDuckGo mbT",
+            "Remove": [
+                "Amazon.de",
+                "eBay",
+                "Ecosia",
+                "Wikipedia (de)"
+            ]
+        },
+        "StartDownloadsInTempDirectory": true,
+        "UserMessaging": {
+            "ExtensionRecommendations": false,
+            "SkipOnboarding": true
+        }
+    }
+}
