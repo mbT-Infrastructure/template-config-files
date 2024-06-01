@@ -1,0 +1,4 @@
+GRUB_BACKGROUND="/usr/local/share/backgrounds/mbt/mbt-16-9.png"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet"
+GRUB_DISTRIBUTOR="$(lsb_release --id --short 2> /dev/null)"
+GRUB_TIMEOUT=1
