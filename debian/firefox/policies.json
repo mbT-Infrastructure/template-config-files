@@ -1,5 +1,8 @@
 {
     "policies": {
+        "Certificates": {
+            "ImportEnterpriseRoots": true
+        },
         "Cookies": {
             "Behavior": "reject-tracker-and-partition-foreign",
             "BehaviorPrivateBrowsing": "reject-tracker-and-partition-foreign"
@@ -85,12 +88,7 @@
                 }
             ],
             "Default": "DuckDuckGo mbT",
-            "Remove": [
-                "Amazon.de",
-                "eBay",
-                "Ecosia",
-                "Wikipedia (de)"
-            ]
+            "Remove": ["Amazon.de", "eBay", "Ecosia", "Wikipedia (de)"]
         },
         "StartDownloadsInTempDirectory": true,
         "UserMessaging": {
