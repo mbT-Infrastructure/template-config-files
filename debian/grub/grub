@@ -1,4 +1,5 @@
 GRUB_BACKGROUND="/usr/local/share/backgrounds/mbt/mbt-16-9.png"
-GRUB_CMDLINE_LINUX_DEFAULT="quiet"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet amdgpu.gttsize='$(awk '/MemTotal/ {print int($2 / 1024) - 4000}' /proc/meminfo)'"
+GRUB_DEFAULT=0
 GRUB_DISTRIBUTOR="$(lsb_release --id --short 2> /dev/null)"
 GRUB_TIMEOUT=1
