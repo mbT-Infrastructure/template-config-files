@@ -53,6 +53,10 @@
                     {
                         "url": "about:performance",
                         "name": "Task-Manager"
+                    },
+                    {
+                        "url": "about:support",
+                        "name": "Troubleshooting Information"
                     }
                 ]
             }
