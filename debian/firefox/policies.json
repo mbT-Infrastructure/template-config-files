@@ -70,6 +70,18 @@
                 "Value": true,
                 "Status": "default"
             },
+            "browser.low_commit_space_threshold_mb": {
+                "Value": 2000,
+                "Status": "default"
+            },
+            "browser.tabs.min_inactive_duration_before_unload": {
+                "Value": 300000,
+                "Status": "default"
+            },
+            "browser.tabs.unloadOnLowMemory": {
+                "Value": true,
+                "Status": "default"
+            },
             "browser.warnOnQuitShortcut": {
                 "Value": false,
                 "Status": "default"
@@ -88,11 +100,19 @@
                     "Method": "GET",
                     "IconURL": "https://duckduckgo.com/favicon.ico",
                     "SuggestURLTemplate": "https://duckduckgo.com/ac/?q={searchTerms}&type=list",
-                    "Alias": "ddg"
+                    "Alias": "@ddg"
+                },
+                {
+                    "Name": "Google Maps",
+                    "URLTemplate": "https://www.google.com/maps/search/?q={searchTerms}",
+                    "Method": "GET",
+                    "IconURL": "https://www.google.com/s2/favicons?domain=google.com/maps&sz=32",
+                    "SuggestURLTemplate": "https://www.google.com/complete/search?client=firefox&q={searchTerms}",
+                    "Alias": "@maps"
                 }
             ],
             "Default": "DuckDuckGo mbT",
-            "Remove": ["Amazon.de", "eBay", "Ecosia", "Wikipedia (de)"]
+            "Remove": ["Amazon.de", "eBay", "Ecosia", "Wikipedia (de)", "Wikipedia (en)"]
         },
         "StartDownloadsInTempDirectory": true,
         "UserMessaging": {
