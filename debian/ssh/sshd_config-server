@@ -1,0 +1,10 @@
+# Authentication
+AllowUsers root
+ChallengeResponseAuthentication no
+PasswordAuthentication no
+PermitRootLogin prohibit-password
+UsePAM no
+
+# Connection
+HostKey /etc/ssh/ssh_host_key
+X11Forwarding no
