@@ -1,0 +1,5 @@
+model = "cloud/default"
+sandbox_mode = "workspace-write"
+
+[history]
+persistence = "none"
