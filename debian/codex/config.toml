@@ -1,5 +1,16 @@
-model = "cloud/default"
+model = "default"
+model_provider = "ai_api"
 sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+
 
 [history]
 persistence = "none"
+
+[model_providers.ai_api]
+base_url="###AI_API_URL###"
+name="AI API"
+env_key="AI_API_KEY"
+request_max_retries=10
+stream_max_retries = 10
+stream_idle_timeout_ms = 3600000
