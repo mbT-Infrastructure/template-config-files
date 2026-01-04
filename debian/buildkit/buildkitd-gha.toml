@@ -1,0 +1,7 @@
+[worker.containerd]
+maxUsedSpace = "1MB"
+reservedSpace = "1MB"
+
+[worker.oci]
+maxUsedSpace = "1MB"
+reservedSpace = "1MB"
