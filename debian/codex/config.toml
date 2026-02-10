@@ -1,10 +1,12 @@
 model = "default"
-review_model = "default"
+model_context_window=64000
 model_provider = "ai_api"
 
 sandbox_mode = "workspace-write"
 approval_policy = "on-request"
 
+[feedback]
+enabled = false
 
 [history]
 persistence = "none"

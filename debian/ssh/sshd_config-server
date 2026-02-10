@@ -6,5 +6,7 @@ PermitRootLogin prohibit-password
 UsePAM no
 
 # Connection
+ClientAliveCountMax 3
+ClientAliveInterval 20
 HostKey /etc/ssh/ssh_host_key
 X11Forwarding no
