@@ -1,7 +1,9 @@
 [worker.containerd]
+max-parallelism = 1
 maxUsedSpace = "1MB"
 reservedSpace = "1MB"
 
 [worker.oci]
+max-parallelism = 1
 maxUsedSpace = "1MB"
 reservedSpace = "1MB"
