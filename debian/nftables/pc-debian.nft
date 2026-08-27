@@ -1,4 +1,4 @@
-#!/usr/sbin/nft -f
+#!/usr/bin/env --split-string=nft --file
 
 flush ruleset
 
