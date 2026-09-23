@@ -1,0 +1,82 @@
+[bar.default]
+center = [
+    "privacy",
+    "sysmon_cpu",
+    "sysmon_cpu_temp",
+    "sysmon_gpu",
+    "sysmon_memory",
+    "sysmon_memory_swap",
+    "sysmon_network_rx",
+    "sysmon_network_tx",
+]
+end = [
+    "media",
+    "tray",
+    "notifications",
+    "clipboard",
+    "network",
+    "bluetooth",
+    "volume",
+    "brightness",
+    "battery",
+    "control-center",
+    "session",
+    "clock",
+]
+start = ["launcher", "workspaces", "spacer", "taskbar", "spacer", "spacer"]
+
+[brightness]
+enable_ddcutil     = true
+minimum_brightness = 0.0001
+
+[shell.screenshot]
+save_to_file = false
+
+[widget.clock]
+format         = "%H:%M:%S %d.%m.%Y"
+tooltip_format = "%A - KW %U"
+
+[widget.network]
+show_label = false
+vpn_status = "both"
+
+[widget.sysmon_cpu]
+stat          = "cpu_usage"
+type          = "sysmon"
+visualization = "none"
+[widget.sysmon_cpu_temp]
+show_glyph    = false
+stat          = "cpu_temp"
+type          = "sysmon"
+visualization = "none"
+[widget.sysmon_gpu]
+stat          = "gpu_usage"
+type          = "sysmon"
+visualization = "none"
+[widget.sysmon_gpu_temp]
+show_glyph    = false
+stat          = "gpu_temp"
+type          = "sysmon"
+visualization = "none"
+[widget.sysmon_memory]
+stat          = "ram_pct"
+type          = "sysmon"
+visualization = "none"
+[widget.sysmon_memory_swap]
+show_glyph    = false
+stat          = "swap_pct"
+type          = "sysmon"
+visualization = "none"
+[widget.sysmon_network_rx]
+network_speed_compact = true
+stat                  = "net_rx"
+type                  = "sysmon"
+visualization         = "none"
+[widget.sysmon_network_tx]
+network_speed_compact = true
+stat                  = "net_tx"
+type                  = "sysmon"
+visualization         = "none"
+
+[widget.privacy]
+hide_inactive = true

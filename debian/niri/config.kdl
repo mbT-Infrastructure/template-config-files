@@ -1,0 +1,274 @@
+// This config is in the KDL format: https://kdl.dev
+// https://niri-wm.github.io/niri/Configuration:-Introduction
+
+// Input device.
+input {
+    keyboard {
+        xkb {
+            layout "de,us"
+            variant ",altgr-intl"
+            options "lv5:caps_switch"
+        }
+        numlock
+    }
+
+    touchpad {
+        tap
+        natural-scroll
+        accel-profile "flat"
+        accel-speed 0.4
+        drag true
+        click-method "button-areas"
+        scroll-method "two-finger"
+    }
+
+    mouse {
+        accel-profile "flat"
+        accel-speed 0.4
+    }
+    warp-mouse-to-focus
+}
+
+// Windows positioning and sizing.
+layout {
+    gaps 4
+    preset-column-widths {
+        proportion 0.5
+        proportion 0.33333
+        proportion 0.66667
+        proportion 1.0
+    }
+    preset-window-heights {
+        proportion 0.5
+        proportion 0.33333
+        proportion 0.66667
+        proportion 1.0
+    }
+    default-column-width { proportion 0.5;}
+    focus-ring {
+        width 4
+        active-color "#E75B12"
+        inactive-color "#383E42"
+    }
+    tab-indicator {
+        width 4
+        place-within-column
+        active-color "#E75B12"
+    }
+    insert-hint { color "#E75B1280"; }
+    border {
+        off
+    }
+}
+
+// Autostart
+spawn-sh-at-startup "kanshi || kanshi --config /etc/kanshi/config.d/mbt-kanshi-config"
+spawn-at-startup "noctalia"
+
+
+// Animation settings.
+animations {
+    window-open {
+        duration-ms 400
+    }
+    window-close {
+        duration-ms 400
+    }
+}
+
+
+// Window and layer rules.
+prefer-no-csd
+
+layer-rule {
+    match namespace="^noctalia-notification$"
+    match namespace="^noctalia-osd$"
+    block-out-from "screencast"
+}
+
+window-rule {
+    geometry-corner-radius 10
+    clip-to-geometry true
+}
+
+// Indicate screencasted windows with red colors.
+window-rule {
+    match is-window-cast-target=true
+    border {
+        on
+        active-color "#900000"
+        inactive-color "#900000"
+    }
+}
+
+// Firefox picture-in-picture player as floating by default.
+window-rule {
+    match app-id=r#"firefox(-esr)$"# title="^Picture-in-Picture$"
+    match app-id=r#"firefox(-esr)$"# title="^Bild-im-Bild$"
+    match app-id=r#"firefox(-esr)$"# title="^Erweiterung: (Bitwarden Passwortmanager)"
+    open-floating true
+}
+
+// Block out Password managers from screen capture.
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    match app-id=r#"firefox(-esr)$"# title="^Erweiterung: (Bitwarden Passwortmanager)"
+
+    block-out-from "screen-capture"
+}
+
+// Workspaces
+workspace "Main"
+workspace "Medien"
+
+
+// Keybindings
+hotkey-overlay {
+    skip-at-startup
+    hide-not-bound
+}
+
+binds {
+    // Niri spezial
+    Super+Delete hotkey-overlay-title=null { show-hotkey-overlay; }
+
+    // Befehle
+    Super+N hotkey-overlay-title="Benachrichtigungen anzeigen" { spawn "noctalia" "msg" "panel-toggle" "control-center" "notifications"; }
+    Super+Shift+N hotkey-overlay-title="Benachrichtigung Aktion ausführen" { spawn "noctalia" "msg" "notification-invoke-latest"; }
+    Super+K allow-when-locked=true hotkey-overlay-title="Bereitschaftsmodus" { spawn "noctalia" "msg" "session" "lock-and-suspend"; }
+    ISO_Level5_Shift+D hotkey-overlay-title="Bildschirmannotationsmodus" { spawn "noctalia" "msg" "annotate"; }
+    Super+F5 allow-inhibiting=false allow-when-locked=true hotkey-overlay-title="Medien vorheriges" { spawn "noctalia" "msg" "media" "previous"; }
+    XF86AudioPrev allow-inhibiting=false allow-when-locked=true hotkey-overlay-title=null { spawn "noctalia" "msg" "media" "previous"; }
+    Super+F6 allow-inhibiting=false allow-when-locked=true hotkey-overlay-title="Medien Play, Pause" { spawn "noctalia" "msg" "media" "toggle"; }
+    XF86AudioPlay allow-inhibiting=false allow-when-locked=true hotkey-overlay-title="Medien Play, Pause" { spawn "noctalia" "msg" "media" "toggle"; }
+    XF86AudioStop allow-inhibiting=false allow-when-locked=true hotkey-overlay-title="Medien Play, Pause" { spawn "noctalia" "msg" "media" "toggle"; }
+    Super+F7 allow-inhibiting=false allow-when-locked=true hotkey-overlay-title="Medien nächstes" { spawn "noctalia" "msg" "media" "next"; }
+    XF86AudioNext allow-inhibiting=false allow-when-locked=true hotkey-overlay-title=null { spawn "noctalia" "msg" "media" "next"; }
+    Super+Shift+F1 hotkey-overlay-title=null { spawn "noctalia" "msg" "notification-dnd-toggle"; }
+    Super+J hotkey-overlay-title="Power Menü" { spawn "noctalia" "msg" "panel-toggle" "session"; }
+    Super+S hotkey-overlay-title="Screenshot ausschneiden" { spawn "noctalia" "msg" "screenshot-region"; }
+    Super+Shift+S hotkey-overlay-title=null { spawn "noctalia" "msg" "screenshot-annotate"; }
+    Print hotkey-overlay-title=null { screenshot-window show-pointer=true write-to-disk=false; }
+    ISO_Level5_Shift+Shift+Print hotkey-overlay-title=null { spawn "noctalia" "msg" "screenshot-fullscreen" "all"; }
+    ISO_Level5_Shift+S hotkey-overlay-title=null { set-dynamic-cast-window; }
+    ISO_Level5_Shift+Shift+S hotkey-overlay-title=null { set-dynamic-cast-monitor; }
+    ISO_Level5_Shift+Super+S hotkey-overlay-title=null { set-dynamic-cast-monitor; }
+    ISO_Level5_Shift+R hotkey-overlay-title=null { clear-dynamic-cast-target; }
+    Super+L hotkey-overlay-title="Sperren" { spawn "noctalia" "msg" "session" "lock"; }
+    ISO_Level5_Shift+G hotkey-overlay-title="Tastatur kapern erlauben, verbieten" { toggle-keyboard-shortcuts-inhibit; }
+    Super+G hotkey-overlay-title="Theme wechseln" { spawn "noctalia" "msg" "theme-mode-toggle"; }
+    Super+V hotkey-overlay-title="Zwischenablageverlauf" { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
+
+
+    // IO
+    Super+B hotkey-overlay-title="Bildschirm aus" { power-off-monitors; }
+    Super+F12 allow-when-locked=true hotkey-overlay-title="Bildschirmhelligkeit erhöhen" { spawn "noctalia" "msg" "brightness-up" "all"; }
+    XF86MonBrightnessUp allow-when-locked=true hotkey-overlay-title=null { spawn "noctalia" "msg" "brightness-up" "all"; }
+    Super+F11 allow-when-locked=true hotkey-overlay-title="Bildschirmhelligkeit verringern" { spawn "noctalia" "msg" "brightness-down" "all"; }
+    XF86MonBrightnessDown allow-when-locked=true hotkey-overlay-title=null { spawn "noctalia" "msg" "brightness-down" "all"; }
+    Super+Shift+F12 allow-when-locked=true hotkey-overlay-title=null { spawn "noctalia" "msg" "brightness-up"; }
+    Super+Shift+F11 allow-when-locked=true hotkey-overlay-title=null { spawn "noctalia" "msg" "brightness-down"; }
+    Super+F4 hotkey-overlay-title="Mikrofon stummschalten" { spawn "noctalia" "msg" "mic-mute"; }
+    XF86AudioMicMute hotkey-overlay-title=null { spawn "noctalia" "msg" "mic-mute"; }
+    Super+Space hotkey-overlay-title="Tastaturbelegung wechseln" { switch-layout "next"; }
+    Super+F10 allow-when-locked=true hotkey-overlay-title="Tastaturbeleuchtung erhöhen" { spawn "noctalia" "msg" "keyboard-backlight-up"; }
+    Super+Shift+F10 allow-when-locked=true hotkey-overlay-title="Tastaturbeleuchtung verringern" { spawn "noctalia" "msg" "keyboard-backlight-down"; }
+    Super+F3 allow-when-locked=true hotkey-overlay-title="Ton lauter" { spawn "noctalia" "msg" "volume-up"; }
+    XF86AudioRaiseVolume allow-when-locked=true hotkey-overlay-title=null { spawn "noctalia" "msg" "volume-up"; }
+    Super+F2 allow-when-locked=true hotkey-overlay-title="Ton leiser" { spawn "noctalia" "msg" "volume-down"; }
+    XF86AudioLowerVolume allow-when-locked=true hotkey-overlay-title=null { spawn "noctalia" "msg" "volume-down"; }
+    Super+F1 allow-when-locked=true hotkey-overlay-title="Ton stumm" { spawn "noctalia" "msg" "volume-mute"; }
+    XF86AudioMute allow-when-locked=true hotkey-overlay-title=null { spawn "noctalia" "msg" "volume-mute"; }
+
+    // Fensterverwaltung
+    ISO_Level5_Shift+Tab hotkey-overlay-title="Arbeitsfläche wechseln" { focus-workspace-previous; }
+    ISO_Level5_Shift+Up hotkey-overlay-title="Arbeitsfläche wechseln oben" { focus-workspace-up; }
+    ISO_Level5_Shift+WheelScrollUp cooldown-ms=150 hotkey-overlay-title=null { focus-workspace-up; }
+    ISO_Level5_Shift+Down hotkey-overlay-title=null { focus-workspace-down; }
+    ISO_Level5_Shift+WheelScrollDown cooldown-ms=150 hotkey-overlay-title=null { focus-workspace-down; }
+    ISO_Level5_Shift+Shift+Up hotkey-overlay-title="Arbeitsfläche auf anderen Bildschirm verschieben" { move-workspace-to-monitor-up; }
+    ISO_Level5_Shift+Super+Up hotkey-overlay-title=null { move-workspace-to-monitor-up; }
+    ISO_Level5_Shift+Shift+Down hotkey-overlay-title=null { move-workspace-to-monitor-down; }
+    ISO_Level5_Shift+Super+Down hotkey-overlay-title=null { move-workspace-to-monitor-down; }
+    ISO_Level5_Shift+Shift+Left hotkey-overlay-title=null { move-workspace-to-monitor-left; }
+    ISO_Level5_Shift+Super+Left hotkey-overlay-title=null { move-workspace-to-monitor-left; }
+    ISO_Level5_Shift+Shift+Right hotkey-overlay-title=null { move-workspace-to-monitor-right; }
+    ISO_Level5_Shift+Super+Right hotkey-overlay-title=null { move-workspace-to-monitor-right; }
+    ISO_Level5_Shift+1 hotkey-overlay-title="Bildschirm fokussieren links" { focus-monitor-left; }
+    ISO_Level5_Shift+2 hotkey-overlay-title="Bildschirm fokussieren rechts" { focus-monitor-down; }
+    ISO_Level5_Shift+Shift+1 hotkey-overlay-title="Bildschirm fokussieren oben" { focus-monitor-up; }
+    ISO_Level5_Shift+Super+1 hotkey-overlay-title=null { focus-monitor-up; }
+    ISO_Level5_Shift+Shift+2 hotkey-overlay-title="Bildschirm fokussieren unten" { focus-monitor-right; }
+    ISO_Level5_Shift+Super+2 hotkey-overlay-title=null { focus-monitor-right; }
+    Super+grave hotkey-overlay-title="Fensterübersicht anzeigen" repeat=false { toggle-overview; }
+    Super+dead_circumflex hotkey-overlay-title=null repeat=false { toggle-overview; }
+    ISO_Level5_Shift+grave hotkey-overlay-title=null { toggle-overview; }
+    Super+Shift+Up hotkey-overlay-title="Fenster auf anderen Bildschirm verschieben" { move-window-to-monitor-up; }
+    Super+Shift+Down hotkey-overlay-title=null { move-window-to-monitor-down; }
+    Super+Shift+Left hotkey-overlay-title=null { move-window-to-monitor-left; }
+    Super+Shift+Right hotkey-overlay-title=null { move-window-to-monitor-right; }
+    ISO_Level5_Shift+Left hotkey-overlay-title="Fenster auf andere Arbeitsfläche verschieben" { move-column-to-workspace-up; }
+    ISO_Level5_Shift+Shift+WheelScrollUp cooldown-ms=150 hotkey-overlay-title=null { move-column-to-workspace-up; }
+    ISO_Level5_Shift+Super+WheelScrollUp cooldown-ms=150 hotkey-overlay-title=null { move-column-to-workspace-up; }
+    ISO_Level5_Shift+Right hotkey-overlay-title=null { move-column-to-workspace-down; }
+    ISO_Level5_Shift+Shift+WheelScrollDown cooldown-ms=150 hotkey-overlay-title=null { move-column-to-workspace-down; }
+    ISO_Level5_Shift+Super+WheelScrollDown cooldown-ms=150 hotkey-overlay-title=null { move-column-to-workspace-down; }
+    Super+Up hotkey-overlay-title="Fenster auf dem Bildschirm anordnen" { move-window-up; }
+    Super+Down hotkey-overlay-title=null { move-window-down; }
+    Super+Left hotkey-overlay-title=null { move-column-left; }
+    Super+Right hotkey-overlay-title=null { move-column-right; }
+    Super+Period hotkey-overlay-title="Fenster Breite ändern" { switch-preset-column-width; }
+    Super+Shift+Period hotkey-overlay-title=null { expand-column-to-available-width; }
+    Super+Comma hotkey-overlay-title="Fenster Höhe ändern" { switch-preset-window-height; }
+    Super+Shift+Comma hotkey-overlay-title=null { reset-window-height; }
+    Super+1 hotkey-overlay-title="Fenster fokussieren links" { focus-column-left; }
+    Super+WheelScrollUp cooldown-ms=150 hotkey-overlay-title=null { focus-column-left; }
+    Super+2 hotkey-overlay-title="Fenster fokussieren rechts" { focus-column-right; }
+    Super+WheelScrollDown cooldown-ms=150 hotkey-overlay-title=null { focus-column-right; }
+    Super+Shift+1 hotkey-overlay-title="Fenster fokussieren oben" { focus-window-up; }
+    Super+Shift+2 hotkey-overlay-title="Fenster fokussieren unten" { focus-window-down; }
+    Super+3 hotkey-overlay-title=null {focus-column-first; }
+    Super+4 hotkey-overlay-title=null {focus-column-last; }
+    Super+Shift+3 hotkey-overlay-title=null {move-column-to-first; }
+    Super+Shift+4 hotkey-overlay-title=null {move-column-to-last; }
+    Super+Page_Up hotkey-overlay-title="Fenster Maximierung umschalten" repeat=false { maximize-window-to-edges; }
+    Super+Page_Down hotkey-overlay-title="Fenster floating umschalten" repeat=false { toggle-window-floating; }
+    Super+Slash hotkey-overlay-title="Fenster Spaltenteilung links" repeat=false { consume-or-expel-window-left; }
+    Super+Minus hotkey-overlay-title=null repeat=false { consume-or-expel-window-left; }
+    Super+Shift+Slash hotkey-overlay-title=null repeat=false { consume-or-expel-window-right; }
+    Super+Shift+Minus hotkey-overlay-title=null repeat=false { consume-or-expel-window-right; }
+    Super+Semicolon hotkey-overlay-title="Fenster Spalte Tabs, Tiling umschalten" { toggle-column-tabbed-display; }
+    Super+Odiaeresis hotkey-overlay-title=null { toggle-column-tabbed-display; }
+    Super+W hotkey-overlay-title="Fenster schließen" { close-window; }
+    Super+F hotkey-overlay-title="Fenster Vollbild umschalten" repeat=false { fullscreen-window; }
+    Super+Shift+F hotkey-overlay-title=null repeat=false { toggle-windowed-fullscreen; }
+
+    // Programme starten
+    Super+X hotkey-overlay-title="Befehl ausführen" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+    Super+U hotkey-overlay-title=null { spawn "firefox"; }
+    Super+Shift+U hotkey-overlay-title=null { spawn "firefox" "--private-window"; }
+    Super+E hotkey-overlay-title=null { spawn "nemo"; }
+    Super+I hotkey-overlay-title=null { spawn "code"; }
+    Super+Y hotkey-overlay-title=null { spawn-sh "chromium --profile media-platform \"--app=$MEDIA_PLATFORM_URL\""; }
+    Super+M hotkey-overlay-title=null { spawn "signal-desktop"; }
+    Super+R hotkey-overlay-title=null { spawn "qalculate-gtk"; }
+    Super+T hotkey-overlay-title=null { spawn-sh "foot --working-dir \"$(xdg-user-dir DOWNLOAD)\""; }
+}
+
+recent-windows {
+    binds {
+        Super+Tab hotkey-overlay-title="Fenster fokussieren wechseln" { next-window; }
+        Alt+Tab hotkey-overlay-title=null { next-window; }
+        Super+Shift+Tab hotkey-overlay-title=null { previous-window; }
+        Alt+Shift+Tab hotkey-overlay-title=null { previous-window; }
+        Super+Escape hotkey-overlay-title=null { next-window filter="app-id"; }
+        Super+Shift+Escape hotkey-overlay-title=null { previous-window filter="app-id"; }
+    }
+
+    highlight {
+        active-color "#E75B12"
+        padding 20
+        corner-radius 10
+    }
+}

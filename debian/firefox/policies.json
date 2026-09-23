@@ -25,7 +25,8 @@
             }
         },
         "FirefoxHome": {
-            "SponsoredTopSites": false
+            "SponsoredTopSites": false,
+            "Stories": false
         },
         "FirefoxSuggest": {
             "SponsoredSuggestions": false,
@@ -70,6 +71,10 @@
                 "Value": true,
                 "Status": "default"
             },
+            "browser.link.open_newwindow.override.external": {
+                "Value": 2,
+                "Status": "default"
+            },
             "browser.low_commit_space_threshold_mb": {
                 "Value": 2000,
                 "Status": "default"
@@ -109,10 +114,28 @@
                     "IconURL": "https://www.google.com/s2/favicons?domain=google.com/maps&sz=32",
                     "SuggestURLTemplate": "https://www.google.com/complete/search?client=firefox&q={searchTerms}",
                     "Alias": "@maps"
+                },
+                {
+                    "Name": "The Movie Database",
+                    "URLTemplate": "https://www.themoviedb.org/search?query={searchTerms}",
+                    "SuggestURLTemplate": "https://www.themoviedb.org/search/suggest?query={searchTerms}",
+                    "IconURL": "https://www.themoviedb.org/favicon.ico",
+                    "Description": "The Movie Database",
+                    "Alias": "@tmdb"
                 }
             ],
             "Default": "DuckDuckGo mbT",
-            "Remove": ["Amazon.de", "eBay", "Ecosia", "Wikipedia (de)", "Wikipedia (en)"]
+            "Remove": [
+                "Amazon.de",
+                "Bing",
+                "eBay",
+                "Ecosia",
+                "LEO Eng-Deu",
+                "Perplexity",
+                "Startpage",
+                "Wikipedia (de)",
+                "Wikipedia (en)"
+            ]
         },
         "StartDownloadsInTempDirectory": true,
         "UserMessaging": {
