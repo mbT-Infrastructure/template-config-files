@@ -124,6 +124,12 @@ workspace "Medien"
 
 
 // Keybindings
+gestures {
+    hot-corners {
+        off
+    }
+}
+
 hotkey-overlay {
     skip-at-startup
     hide-not-bound
@@ -245,6 +251,7 @@ binds {
     Super+Shift+F hotkey-overlay-title=null repeat=false { toggle-windowed-fullscreen; }
 
     // Programme starten
+    Super+Shift+J hotkey-overlay-title=null { spawn-sh "xdg-open \"${AI_CHAT_URL}\""; }
     Super+X hotkey-overlay-title="Befehl ausführen" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
     Super+U hotkey-overlay-title=null { spawn "firefox"; }
     Super+Shift+U hotkey-overlay-title=null { spawn "firefox" "--private-window"; }
