@@ -12,6 +12,14 @@ input {
         numlock
     }
 
+    tablet {
+        map-to-output "eDP-1"
+    }
+
+    touch {
+        map-to-output "eDP-1"
+    }
+
     touchpad {
         tap
         natural-scroll
@@ -160,7 +168,7 @@ binds {
     ISO_Level5_Shift+S hotkey-overlay-title=null { set-dynamic-cast-window; }
     ISO_Level5_Shift+Shift+S hotkey-overlay-title=null { set-dynamic-cast-monitor; }
     ISO_Level5_Shift+Super+S hotkey-overlay-title=null { set-dynamic-cast-monitor; }
-    ISO_Level5_Shift+R hotkey-overlay-title=null { clear-dynamic-cast-target; }
+    ISO_Level5_Shift+W hotkey-overlay-title=null { clear-dynamic-cast-target; }
     Super+L hotkey-overlay-title="Sperren" { spawn "noctalia" "msg" "session" "lock"; }
     ISO_Level5_Shift+G hotkey-overlay-title="Tastatur kapern erlauben, verbieten" { toggle-keyboard-shortcuts-inhibit; }
     Super+G hotkey-overlay-title="Theme wechseln" { spawn "noctalia" "msg" "theme-mode-toggle"; }
@@ -169,6 +177,7 @@ binds {
 
     // IO
     Super+B hotkey-overlay-title="Bildschirm aus" { power-off-monitors; }
+    ISO_Level5_Shift+Shift+B allow-when-locked=true hotkey-overlay-title=null { spawn "kanshictl" "reload"; }
     Super+F12 allow-when-locked=true hotkey-overlay-title="Bildschirmhelligkeit erhöhen" { spawn "noctalia" "msg" "brightness-up" "all"; }
     XF86MonBrightnessUp allow-when-locked=true hotkey-overlay-title=null { spawn "noctalia" "msg" "brightness-up" "all"; }
     Super+F11 allow-when-locked=true hotkey-overlay-title="Bildschirmhelligkeit verringern" { spawn "noctalia" "msg" "brightness-down" "all"; }

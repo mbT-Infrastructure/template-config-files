@@ -29,12 +29,28 @@ start = ["launcher", "workspaces", "spacer", "taskbar", "spacer", "spacer"]
 enable_ddcutil     = true
 minimum_brightness = 0.0001
 
+[hooks]
+battery_charging   = "power.sh --normal"
+battery_discharging = "power.sh --saving"
+battery_plugged    = "power.sh --normal"
+
+[idle]
+pre_action_fade_seconds = 10.0
+
+[idle.behavior.lock]
+timeout = 600
+enabled = true
+
+[idle.behavior.screen-off]
+timeout = 630
+enabled = true
+
 [shell.screenshot]
 save_to_file = false
 
 [widget.clock]
 format         = "%H:%M:%S %d.%m.%Y"
-tooltip_format = "%A - KW %U"
+tooltip_format = "%Z - %A - KW %V - %s"
 
 [widget.network]
 show_label = false
