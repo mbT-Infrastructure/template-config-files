@@ -126,6 +126,14 @@ window-rule {
     block-out-from "screen-capture"
 }
 
+// Signal screen sharing window
+window-rule {
+    match app-id="signal" title="Sharing screen"
+
+    open-focused false
+    default-floating-position x=0 y=0 relative-to="top"
+}
+
 // Workspaces
 workspace "Main"
 workspace "Medien"

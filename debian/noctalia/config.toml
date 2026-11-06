@@ -9,6 +9,7 @@ center = [
     "sysmon_network_rx",
     "sysmon_network_tx",
 ]
+concave_edge_corners = false
 end = [
     "media",
     "tray",
@@ -16,13 +17,16 @@ end = [
     "clipboard",
     "network",
     "bluetooth",
+    "mic",
     "volume",
     "brightness",
     "battery",
-    "control-center",
+    "clock-time",
+    "clock-date",
     "session",
-    "clock",
 ]
+margin_edge = 0
+margin_ends = 0
 start = ["launcher", "workspaces", "spacer", "taskbar", "spacer", "spacer"]
 
 [brightness]
@@ -30,27 +34,39 @@ enable_ddcutil     = true
 minimum_brightness = 0.0001
 
 [hooks]
-battery_charging   = "power.sh --normal"
+battery_charging    = "power.sh --normal"
 battery_discharging = "power.sh --saving"
-battery_plugged    = "power.sh --normal"
+battery_plugged     = "power.sh --normal"
 
 [idle]
 pre_action_fade_seconds = 10.0
 
 [idle.behavior.lock]
-timeout = 600
 enabled = true
+timeout = 600
 
 [idle.behavior.screen-off]
-timeout = 630
 enabled = true
+timeout = 630
 
 [shell.screenshot]
 save_to_file = false
 
-[widget.clock]
-format         = "%H:%M:%S %d.%m.%Y"
-tooltip_format = "%Z - %A - KW %V - %s"
+[widget.clock-time]
+color          = "primary"
+format         = "%H:%M:%S"
+tooltip_format = "%Z - %s"
+type           = "clock"
+[widget.clock-date]
+color          = "secondary"
+format         = "%d.%m.%Y"
+tooltip_format = "%A - KW %V"
+type           = "clock"
+
+[widget.mic]
+device             = "input"
+hide_when_inactive = true
+type               = "volume"
 
 [widget.network]
 show_label = false
