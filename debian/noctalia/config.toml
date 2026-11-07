@@ -49,6 +49,10 @@ timeout = 600
 enabled = true
 timeout = 630
 
+[lockscreen]
+transition = ["fade"]
+transition_duration = 400
+
 [shell.screenshot]
 save_to_file = false
 
@@ -71,6 +75,9 @@ type               = "volume"
 [widget.network]
 show_label = false
 vpn_status = "both"
+
+[widget.privacy]
+hide_inactive = true
 
 [widget.sysmon_cpu]
 stat          = "cpu_usage"
@@ -109,6 +116,3 @@ network_speed_compact = true
 stat                  = "net_tx"
 type                  = "sysmon"
 visualization         = "none"
-
-[widget.privacy]
-hide_inactive = true
